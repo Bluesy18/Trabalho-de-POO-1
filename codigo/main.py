@@ -1,5 +1,6 @@
 from classes import Jogador,Time
 
+# penis
 jogadores = []
 
 j1 = Jogador("Davi", int(12))
