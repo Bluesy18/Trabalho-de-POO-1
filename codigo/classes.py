@@ -28,6 +28,17 @@ class Time:
 
         self.indice_defensivo = Decimal(indice_defensivo).quantize(0, ROUND_HALF_UP)
 
+        # Calcula índice ofensivo
+        indice_ofensivo = 0
+
+        for ata in self.lista_atacantes:
+            indice_ofensivo += ata.get_overall()
+        
+        indice_ofensivo = (indice_ofensivo/len(self.lista_atacantes))*2
+        indice_ofensivo = (indice_ofensivo+meias)/3
+
+        self.indidice_ofensivo = Decimal(indice_ofensivo).quantize(0, ROUND_HALF_UP)
+
         # Calcula overall
         overall_time = 0
         for i in range(11):
@@ -46,7 +57,10 @@ class Time:
         return self.lista_jogadores
     
     def get_indice_defensivo(self):
-        return self.indice_defensivo    
+        return self.indice_defensivo
+    
+    def get_indice_ofensivo(self):
+        return self.indidice_ofensivo 
 
     
 class Jogador:
@@ -62,4 +76,13 @@ class Jogador:
         self.velocidade = velocidade
         self.finalizacao = finalizacao
 
+class Jogo:
+    def __init__(self, gols_time1, gols_time2):
+        self.gols_time1 = gols_time1
+        self.gols_time2 = gols_time2
+
+    def get_gols_time1(self):
+        return self.gols_time1
     
+    def get_gols_time2(self):
+        return self.gols_time2
