@@ -2,8 +2,8 @@ from classes import Jogador
 from decimal import Decimal, ROUND_HALF_UP
 
 class Goleiro(Jogador):
-  def __init__(self, nome_jogador, numero_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
-    super().__init__(nome_jogador, numero_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao)
+  def __init__(self, nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
+    super().__init__(nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao)
 
     self.habgoleiro = habgoleiro*10
 
@@ -19,10 +19,13 @@ class Goleiro(Jogador):
     
   def get_numero(self):
     return self.numero_jogador
+  
+  def get_pos(self):
+    return self.pos_jogador
 
 class Defensor(Jogador):
-  def __init__(self, nome_jogador, numero_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
-    super().__init__(nome_jogador, numero_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao)
+  def __init__(self, nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
+    super().__init__(nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao)
 
     self.defesa = defesa*4
     self.fisico = fisico*3
@@ -39,10 +42,13 @@ class Defensor(Jogador):
     
   def get_numero(self):
     return self.numero_jogador
+  
+  def get_pos(self):
+    return self.pos_jogador
 
 class MeioCampista(Jogador):
-  def __init__(self, nome_jogador, numero_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
-    super().__init__(nome_jogador, numero_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao)
+  def __init__(self, nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
+    super().__init__(nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao)
 
     self.passe = passe*3
     self.drible = drible*3
@@ -59,10 +65,13 @@ class MeioCampista(Jogador):
     
   def get_numero(self):
     return self.numero_jogador
-
+  
+  def get_pos(self):
+    return self.pos_jogador
+  
 class Atacante(Jogador):
-  def __init__(self, nome_jogador, numero_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
-    super().__init__(nome_jogador, numero_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao)
+  def __init__(self, nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
+    super().__init__(nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao)
 
     self.finalizacao = finalizacao*4
     self.velocidade = velocidade*2
@@ -80,6 +89,10 @@ class Atacante(Jogador):
     
   def get_numero(self):
     return self.numero_jogador
+  
+  def get_pos(self):
+    return self.pos_jogador
+  
 
 
 

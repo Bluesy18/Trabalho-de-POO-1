@@ -10,7 +10,8 @@ class Time:
         return self.lista_jogadores
     
 class Jogador:
-    def __init__(self, nome_jogador, numero_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
+    def __init__(self, nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
+        self.pos_jogador = pos_jogador
         self.nome_jogador = nome_jogador
         self.numero_jogador = numero_jogador
         self.habgoleiro = habgoleiro
