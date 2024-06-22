@@ -16,5 +16,9 @@ j10 = Atacante("Erick", "9", "ATA", 1, 3, 4, 3, 1, 3, 4)
 j11 = Atacante("Bryan", "10", "PD", 6, 3, 5, 7, 10, 8, 7)
 
 jogadores = [j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11]
+goleiros = [j1]
+defensores = [j2, j3, j4, j5]
+meio_campistas = [j6, j7, j8]
+atacantes = [j9, j10, j11]
 
-time2 = Time("IFSC-SJ", jogadores)
+time2 = Time("IFSC-SJ", jogadores, goleiros, defensores, meio_campistas, atacantes)

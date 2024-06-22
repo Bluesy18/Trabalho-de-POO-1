@@ -16,5 +16,9 @@ j10 = Atacante("Davi Fernando", "9", "ATA", 10, 10, 10, 10, 10, 10, 10)
 j11 = Atacante("Herrera", "11", "PD", 9, 4, 7, 7, 9, 8, 7)
 
 jogadores = [j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11]
+goleiros = [j1]
+defensores = [j2, j3, j4, j5]
+meio_campistas = [j6, j7, j8]
+atacantes = [j9, j10, j11]
 
-time1 = Time("Alcateia", jogadores)
+time1 = Time("Alcateia", jogadores, goleiros, defensores, meio_campistas, atacantes)

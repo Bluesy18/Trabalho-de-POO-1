@@ -1,14 +1,41 @@
+from decimal import Decimal, ROUND_HALF_UP
+
 class Time:
-    def __init__(self, nome_time, lista_jogadores):
+    def __init__(self, nome_time, lista_jogadores, lista_goleiros, lista_defensores, lista_meio_campistas, lista_atacantes):
+
+        # Define atributos recebidos
         self.nome_time = nome_time
         self.lista_jogadores = lista_jogadores
+        self.lista_goleiros = lista_goleiros
+        self.lista_defensores = lista_defensores
+        self.lista_meio_campistas = lista_meio_campistas
+        self.lista_atacantes = lista_atacantes
 
+        # Calcula índice defensivo
+        indice_defensivo = lista_goleiros[0].get_overall()
+
+        for defe in self.lista_defensores:
+            indice_defensivo += defe.get_overall()
+
+        meias = 0
+        for meia in self.lista_meio_campistas:
+            meias += meia.get_overall()
+
+        meias = meias/len(self.lista_meio_campistas)
+
+        indice_defensivo = (indice_defensivo/(len(self.lista_defensores)+1))*2
+        indice_defensivo = (indice_defensivo+meias)/3
+
+        self.indice_defensivo = Decimal(indice_defensivo).quantize(0, ROUND_HALF_UP)
+
+        # Calcula overall
         overall_time = 0
         for i in range(11):
             overall_time += self.lista_jogadores[i].overall
 
         self.overall_time = overall_time
 
+    # Métodos
     def get_overall_time(self):
         return self.overall_time
         
@@ -18,6 +45,8 @@ class Time:
     def get_jogadores(self):
         return self.lista_jogadores
     
+    def get_indice_defensivo(self):
+        return self.indice_defensivo    
 
     
 class Jogador:
