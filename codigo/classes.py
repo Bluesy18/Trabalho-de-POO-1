@@ -9,17 +9,16 @@ class Time:
     def get_jogadores(self):
         return self.lista_jogadores
     
-
-
-
 class Jogador:
-    def __init__(self, nome_jogador, numero_jogador):
+    def __init__(self, nome_jogador, numero_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
         self.nome_jogador = nome_jogador
         self.numero_jogador = numero_jogador
-        
-    def get_nome(self):
-        return self.nome_jogador
-    
-    def get_numero(self):
-        return self.numero_jogador
+        self.habgoleiro = habgoleiro
+        self.defesa = defesa
+        self.fisico = fisico
+        self.passe = passe
+        self.drible = drible
+        self.velocidade = velocidade
+        self.finalizacao = finalizacao
+
     
