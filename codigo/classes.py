@@ -11,29 +11,19 @@ class Time:
         self.lista_meio_campistas = lista_meio_campistas
         self.lista_atacantes = lista_atacantes
 
-        # Define artilheiros
+        # Define finalizações
         finalizacoes = []
         for fin in self.lista_jogadores:
             finalizacoes.append(fin.finalizacao)
 
         self.finalizacoes = finalizacoes
 
-        self.finalizacoes_sorted = sorted(finalizacoes)
+        # Define passes
+        passes = []
+        for pas in self.lista_jogadores:
+            passes.append(fin.passe)
 
-        self.maiores_fin = self.finalizacoes_sorted[-3:]
-
-        artilheiros_index = []
-        artilheiros = []
-
-        for j, k in enumerate(self.finalizacoes):
-            if ((k == self.maiores_fin[0]) or (k == self.maiores_fin[1]) or (k == self.maiores_fin[2])):
-                artilheiros_index.append(j)
-
-        for art in artilheiros_index:
-            artilheiros.append(lista_jogadores[art].get_nome())
-
-        self.artilheiros = artilheiros
-
+        self.passes = passes
 
         # Calcula índice defensivo
         indice_defensivo = lista_goleiros[0].get_overall()
@@ -89,14 +79,8 @@ class Time:
     def get_finalizacoes(self):
         return self.finalizacoes
     
-    def get_finalizacoes_sorted(self):
-        return self.finalizacoes_sorted
-
-    def get_maiores_fin(self):
-        return self.maiores_fin
-    
-    def get_artilheiros(self):
-        return self.artilheiros
+    def get_passes(self):
+        return self.passes
     
 class Jogador:
     def __init__(self, nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
