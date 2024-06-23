@@ -27,3 +27,8 @@ if (gols2 < 0):
 jogo = Jogo(gols1, gols2)
 
 print(f"Resultado do jogo:\n{time1.get_nome_time()}  {jogo.get_gols_time1()} X {jogo.get_gols_time2()}  {time2.get_nome_time()}")
+
+print(time1.get_finalizacoes())
+print(time1.get_finalizacoes_sorted())
+print(time1.get_maiores_fin())
+print(time1.get_artilheiros())
