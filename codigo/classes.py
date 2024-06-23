@@ -21,7 +21,7 @@ class Time:
         # Define passes
         passes = []
         for pas in self.lista_jogadores:
-            passes.append(fin.passe)
+            passes.append(pas.passe)
 
         self.passes = passes
 
@@ -84,6 +84,13 @@ class Time:
     
 class Jogador:
     def __init__(self, nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
+        partidas_jogadas = 0
+        gols_marcadados = 0
+        assistencias_feitas = 0
+
+        self.partidas_jogadas = partidas_jogadas
+        self.gols_marcados = gols_marcadados
+        self.assistencias_feitas = assistencias_feitas
         self.pos_jogador = pos_jogador
         self.nome_jogador = nome_jogador
         self.numero_jogador = numero_jogador
@@ -94,6 +101,17 @@ class Jogador:
         self.drible = drible
         self.velocidade = velocidade
         self.finalizacao = finalizacao
+
+    def get_partidas_jogadas(self):
+        return self.partidas_jogadas
+
+    def get_gols_marcados(self):
+        return self.gols_marcados
+    
+    def get_assistencias_feitas(self):
+        return self.assistencias_feitas
+    
+        
 
 class Jogo:
     def __init__(self, gols_time1, gols_time2):
