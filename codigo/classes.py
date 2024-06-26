@@ -85,10 +85,12 @@ class Time:
 class Jogador:
     def __init__(self, nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
         partidas_jogadas = 0
+        partidas_vencidas = 0
         gols_marcadados = 0
         assistencias_feitas = 0
 
         self.partidas_jogadas = partidas_jogadas
+        self.partidas_vencidas = partidas_vencidas
         self.gols_marcados = gols_marcadados
         self.assistencias_feitas = assistencias_feitas
         self.pos_jogador = pos_jogador
@@ -104,6 +106,9 @@ class Jogador:
 
     def get_partidas_jogadas(self):
         return self.partidas_jogadas
+    
+    def get_partidas_vencidas(self):
+        return self.partidas_vencidas
 
     def get_gols_marcados(self):
         return self.gols_marcados
@@ -114,9 +119,19 @@ class Jogador:
         
 
 class Jogo:
-    def __init__(self, gols_time1, gols_time2):
+    def __init__(self, gols_time1, gols_time2, time1, time2):
+        self.time1 = time1
+        self.time2 = time2
         self.gols_time1 = gols_time1
         self.gols_time2 = gols_time2
+
+    def ganhador(self):
+        if(self.gols_time1 > self.gols_time2):
+            for player1 in self.time1.lista_jogadores:
+                player1.partidas_vencidas += 1
+        elif(self.gols_time1 < self.gols_time2):
+            for player2 in self.time2.lista_jogadores:
+                player2.partidas_vencidas += 1
 
     def get_gols_time1(self):
         return self.gols_time1

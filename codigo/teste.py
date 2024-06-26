@@ -20,7 +20,8 @@ def simulacao(time1, time2):
     if (gols2 < 0):
         gols2 = 0
 
-    jogo = Jogo(gols1, gols2)
+    jogo = Jogo(gols1, gols2, time1, time2)
+    jogo.ganhador()
 
     print(f"Resultado do jogo:\n{time1.get_nome_time()}  {jogo.get_gols_time1()} X {jogo.get_gols_time2()}  {time2.get_nome_time()}")
 
@@ -96,12 +97,14 @@ for r in range(5):
 for p1 in time1.lista_jogadores:
     print(p1.get_nome())
     print(p1.get_partidas_jogadas())
+    print(p1.get_partidas_vencidas())
     print(p1.get_gols_marcados())
     print(p1.get_assistencias_feitas())
 
 for p2 in time2.lista_jogadores:
     print(p2.get_nome())
     print(p2.get_partidas_jogadas())
+    print(p2.get_partidas_vencidas())
     print(p2.get_gols_marcados())
     print(p2.get_assistencias_feitas())
 
