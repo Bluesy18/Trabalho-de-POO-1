@@ -133,8 +133,14 @@ class Jogador:
     def get_assistencias_feitas(self):
         return self.assistencias_feitas
     
+    def get_is_capitao(self):
+        return self.is_capitao
+    
     def set_is_capitao(self):
         self.is_capitao = True
+
+    def set_num(self, num_novo):
+        self.numero_jogador = num_novo
     
 
 class Jogo:
