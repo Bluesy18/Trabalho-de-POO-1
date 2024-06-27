@@ -213,9 +213,9 @@ class Jogo:
                 assistentes2.append(assi2.get_nome())
 
             for f2 in range(self.gols2):
-                if (assistentes1[f2] == artilheiros1[f2]):
+                if (assistentes2[f2] == artilheiros2[f2]):
                     assis2[f2].assistencias_feitas -= 1
-                    assistentes1.pop(f2)
+                    assistentes2.pop(f2)
 
             print(f"Os gols do time {self.time2.get_nome_time()} foram de {artilheiros2}")
             print(f"As assistências do time {self.time2.get_nome_time()} foram de {assistentes2}")
@@ -228,7 +228,9 @@ class Jogo:
         else:
             self.time1.set_perdedor()
             self.time2.set_perdedor()
-    
+        self.gols1 = 0
+        self.gols2 = 0
+
     def zebra(self):
         if(self.time1.get_perdedor() == True):
             aleatorio = random.uniform(1, 1.5)

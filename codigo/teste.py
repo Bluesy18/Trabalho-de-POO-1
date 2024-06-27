@@ -10,6 +10,8 @@ jogo.simulacao()
 jogo.resultado()
 jogo.ganhador()
 
+  
+
 # def simulacao(time1, time2):
 #     for player1 in time1.lista_jogadores:
 #         player1.partidas_jogadas += 1
