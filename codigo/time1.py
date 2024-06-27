@@ -15,6 +15,8 @@ j9 = Atacante("Gabriel", "7", "PE", 1, 4, 8, 8, 5, 6, 7)
 j10 = Atacante("Davi Fernando", "9", "ATA", 10, 10, 10, 10, 10, 10, 10)
 j11 = Atacante("Herrera", "11", "PD", 9, 4, 7, 7, 9, 8, 7)
 
+
+
 jogadores = [j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11]
 goleiros = [j1]
 defensores = [j2, j3, j4, j5]

@@ -4,12 +4,13 @@ from time1 import time1
 from time2 import time2
 from random import randint
 
-lista_jogadores = []
-lista_goleiros = []
-lista_defensores = []
-lista_meio_campistas = []
-lista_atacantes = []
+
+times_cadastrados = 2
+lista_times = [time1, time2]
 posicoes = ["Goleiro", "Lat. Esquerdo", "Zag. Esquerdo", "Zag. Direito", "Lat. Direito", "Volante", "Meio-Campo Esquerdo", "Meio-Campo Direito", "Ponta Esquerda", "Centro Avante", "Ponta Esquerda"]
+lista_times[0].lista_jogadores[2].set_is_capitao()
+lista_times[1].lista_jogadores[6].set_is_capitao()
+
 
 flag = False
 
@@ -20,11 +21,17 @@ while True:
     print('2 - Alterar número da camisa de um jogador')
     print('3 - Consultar dados de um jogador')
     print('4 - Excluir jogador')
-    print('5 - Consultar os dois times já disponíveis')
+    print('5 - Consultar times')
     print('0 - Encerrar programa')
     op = int(input('Escolha uma operação: '))
     
     if op == 1:
+        jogadores = []
+        goleiros = []
+        defensores = []
+        meio_campistas = []
+        atacantes = []
+
         print("Bem vindo ao cadastro de jogadores, aqui você cadastrará cada jogador de um time de 11 jogadores:")
         
         nome_time = input("Primeiramente, digite o nome do time: ")
@@ -47,16 +54,16 @@ while True:
                     '''g = Jogador(nome_jogador, numero_jogador, "GOL", habgoleiro, 0, 0, 0, 0, 0, 0)
                     '''
                     g = Goleiro(nome_jogador, numero_jogador, "GOL", habgoleiro, 0, 0, 0, 0, 0, 0)
-                    lista_goleiros.append(g)
-                    lista_jogadores.append(g)
+                    goleiros.append(g)
+                    jogadores.append(g)
                 
                 if esc == 2:
                     nome_jogador = input("Nome: ")
                     numero_jogador = input("Número da camisa: ")
                     habgoleiro = randint(0, 10)
                     g = Goleiro(nome_jogador, numero_jogador, "GOL", habgoleiro, 0, 0, 0, 0, 0, 0)
-                    lista_goleiros.append(g)
-                    lista_jogadores.append(g)
+                    goleiros.append(g)
+                    jogadores.append(g)
                     
                 if esc == 3:
                     nome_jogador = input("Nome: ")
@@ -80,8 +87,8 @@ while True:
                     '''d = Jogador(nome_jogador, numero_jogador, "DEF", 1, defesa, fisico, 0, 0, 0, 0)
                     '''
                     d = Defensor(nome_jogador, numero_jogador, "DEF", 1, defesa, fisico, passe, drible, velocidade, finalização)
-                    lista_defensores.append(d)
-                    lista_jogadores.append(d)
+                    defensores.append(d)
+                    jogadores.append(d)
                 
                 if esc == 2:
                     nome_jogador = input("Nome: ")
@@ -93,8 +100,8 @@ while True:
                     velocidade = randint(0, 10)
                     finalização = randint(0, 10)
                     d = Defensor(nome_jogador, numero_jogador, "DEF", 1, defesa, fisico, passe, drible, velocidade, finalização)
-                    lista_defensores.append(d)
-                    lista_jogadores.append(d)
+                    defensores.append(d)
+                    jogadores.append(d)
                     
                 if esc == 3:
                     nome_jogador = input("Nome: ")
@@ -118,8 +125,8 @@ while True:
                     '''d = Jogador(nome_jogador, numero_jogador, "DEF", 1, defesa, fisico, 0, 0, 0, 0)
                     '''
                     m = MeioCampista(nome_jogador, numero_jogador, "MEI", 1, defesa, fisico, passe, drible, velocidade, finalização)
-                    lista_meio_campistas.append(m)
-                    lista_jogadores.append(m)
+                    meio_campistas.append(m)
+                    jogadores.append(m)
                 
                 if esc == 2:
                     nome_jogador = input("Nome: ")
@@ -131,8 +138,8 @@ while True:
                     velocidade = randint(0, 10)
                     finalização = randint(0, 10)
                     m = MeioCampista(nome_jogador, numero_jogador, "MEI", 1, defesa, fisico, passe, drible, velocidade, finalização)
-                    lista_meio_campistas.append(m)
-                    lista_jogadores.append(m)
+                    meio_campistas.append(m)
+                    jogadores.append(m)
                     
                 if esc == 3:
                     nome_jogador = input("Nome: ")
@@ -156,8 +163,8 @@ while True:
                     '''d = Jogador(nome_jogador, numero_jogador, "DEF", 1, defesa, fisico, 0, 0, 0, 0)
                     '''
                     a = Atacante(nome_jogador, numero_jogador, "ATA", 1, defesa, fisico, passe, drible, velocidade, finalização)
-                    lista_atacantes.append(a)
-                    lista_jogadores.append(a)
+                    atacantes.append(a)
+                    jogadores.append(a)
                 
                 if esc == 2:
                     nome_jogador = input("Nome: ")
@@ -169,30 +176,26 @@ while True:
                     velocidade = randint(0, 10)
                     finalização = randint(0, 10)
                     a = Atacante(nome_jogador, numero_jogador, "ATA", 1, defesa, fisico, passe, drible, velocidade, finalização)
-                    lista_atacantes.append(a)
-                    lista_jogadores.append(a)
+                    atacantes.append(a)
+                    jogadores.append(a)
                     
                 if esc == 3:
                     nome_jogador = input("Nome: ")
                     numero_jogador = input("Número da camisa: ")
-                
-                
-                    
-                    
-                    
-                    
-                
         
-        
-        
+        times_cadastrados += 1
+        lista_times[times_cadastrados-1] = Time(nome_time, jogadores, goleiros, defensores, meio_campistas, atacantes)
         
     
     if op == 2:
         print("Bem vindo ao menu de alteração de camisa:")
         flag=False
+        for _ in lista_times:
+            print(f"{lista_times.index(_)+1} - {_.get_nome_time()}")
+        time_camisa = int(input("Digite em qual dos times você deseja alterar a camisa: "))
         name = input("Digite o nome do jogador que terá o número da camisa modificado: ")
         
-        for num in lista_jogadores :
+        for num in lista_times[time_camisa-1].lista_jogadores :
             if name == num.get_nome():
                 num_novo = input("Digite o novo número desejado para esse jogador: ")
                 num.set_num(num_novo)
@@ -210,15 +213,24 @@ while True:
         
         if con == 1:
             flag=False
+            for _ in lista_times:
+                print(f"{lista_times.index(_)+1} - {_.get_nome_time()}")
+            time_consulta = int(input("Digite em qual dos times você deseja consultar: "))
             name = input("Digite o nome do jogador que deseja consultar os dados: ")
             
-            for jog in lista_jogadores :
+            for jog in lista_times[time_consulta-1].lista_jogadores :
                 if name == jog.get_nome():
                     print("Dados do jogador:")
+                    if (jog.get_is_capitao == True):
+                        print("> CAPITÃO <")
                     print('Nome:', jog.get_nome())
                     print('Número da camisa:', jog.get_numero())
                     print('Posição:', jog.get_pos())
                     print('Overall(média de habilidade):', jog.get_overall())
+                    print("Partidas jogadas:", jog.get_partidas_jogadas())
+                    print("Partidas vencidas:", jog.get_partidas_jogadas())
+                    print("Gols marcados:", jog.get_partidas_jogadas())
+                    print("Assistências feitas:", jog.get_partidas_jogadas())
                     
                     flag = True
             if flag == False:
@@ -226,48 +238,55 @@ while True:
         
         if con == 2:
             flag=False
-            nume = input("Digite o nome do jogador que deseja consultar os dados: ")
+            for _ in lista_times:
+                print(f"{lista_times.index(_)+1} - {_.get_nome_time()}")
+            time_consulta = int(input("Digite em qual dos times você deseja consultar: "))
+            nume = input("Digite o número do jogador que deseja consultar os dados: ")
             
-            for jog in lista_jogadores :
+            for jog in lista_times[time_consulta-1].lista_jogadores:
                 if nume == jog.get_numero():
                     print("Dados do jogador:")
+                    if (jog.get_is_capitao == True):
+                        print("> CAPITÃO <")
                     print('Nome:', jog.get_nome())
                     print('Número da camisa:', jog.get_numero())
                     print('Posição:', jog.get_pos())
                     print('Overall(média de habilidade):', jog.get_overall())
+                    print("Partidas jogadas:", jog.get_partidas_jogadas())
+                    print("Partidas vencidas:", jog.get_partidas_jogadas())
+                    print("Gols marcados:", jog.get_partidas_jogadas())
+                    print("Assistências feitas:", jog.get_partidas_jogadas())
                     
                     flag = True
             if flag == False:
-                print("Não existe um jogador cadastrado com esse número de camisa!")
+                print("Não existe um jogador cadastrado com esse nome!")
     
-    if op == 4:
-        print("Bem vindo ao menu de exclusão de jogador:")
-        name = input("Digite o nome do jogador que deseja excluir: ")
-        flag=False
+    # if op == 4:
+    #     print("Bem vindo ao menu de exclusão de jogador:")
+    #     flag=False
+    #     for _ in lista_times:
+    #         print(f"{lista_times.index(_)+1} - {_.get_nome_time()}")
+    #     time_consulta = int(input("Digite em qual dos times você deseja excluir um jogador: "))
+    #     name = input("Digite o nome do jogador que deseja excluir: ")
+    #     flag=False
         
-        for i, j in enumerate(lista_jogadores):
-            if name == j.get_nome():
-                lista_jogadores.pop(i)
-                print("Exclusão realizada com sucesso!")
-                flag=True
-        if flag == False:
-            print("Não existe um jogador cadastrado com esse nome!")
+    #     for i, j in enumerate(lista_jogadores):
+    #         if name == j.get_nome():
+    #             lista_jogadores.pop(i)
+    #             print("Exclusão realizada com sucesso!")
+    #             flag=True
+    #     if flag == False:
+    #         print("Não existe um jogador cadastrado com esse nome!")
     
     if op == 5:
-        print("Bem vindo à consulta de times, temos a disposição dois times diferentes: ")
-        print("1 - Para consultar o time 1")
-        print("2 - Para consultar o time 2")
-        time = int(input("Digite uma das opções acima: "))       
+        for _ in lista_times:
+            print(f"{lista_times.index(_)+1} - {_.get_nome_time()}")
+        time_consultaGeral = int(input("Digite qual dos times você deseja consultar: "))     
         
-        if time == 1:            
-            print("TIME 1 - Matilha:")
-            for i in range (11):
-                print(f"{time1.lista_jogadores[i].get_pos()}: {time1.lista_jogadores[i].get_numero()} - {time1.lista_jogadores[i].get_nome()} - OVR: {time1.lista_jogadores[i].get_overall()}")
+        print(f"Nome do time: {lista_times[time_consultaGeral-1].get_nome_time}")
+        for timeCon in lista_times[time_consultaGeral-1].lista_jogadores:
+                print(f"{timeCon.get_pos()}: {timeCon.get_numero()} - {timeCon.get_nome()} - OVR: {timeCon.get_overall()}")
                 
-        elif time == 2:            
-            print("TIME 2 - IFSC SJ:")
-            for i in range (11):
-                print(f"{time2.lista_jogadores[i].get_pos()}: {time2.lista_jogadores[i].get_numero()} - {time2.lista_jogadores[i].get_nome()} - OVR: {time2.lista_jogadores[i].get_overall()}")
         
         
         
