@@ -136,6 +136,18 @@ class Jogador:
     def get_is_capitao(self):
         return self.is_capitao
     
+    def get_overall(self):
+        return self.overall
+  
+    def get_nome(self):
+        return self.nome_jogador
+    
+    def get_numero(self):
+        return self.numero_jogador
+  
+    def get_pos(self):
+        return self.pos_jogador
+    
     def set_is_capitao(self):
         self.is_capitao = True
 

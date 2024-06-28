@@ -9,18 +9,6 @@ class Goleiro(Jogador):
 
     self.overall = Decimal(overall).quantize(0, ROUND_HALF_UP)
 
-  def get_overall(self):
-    return self.overall
-  
-  def get_nome(self):
-    return self.nome_jogador
-    
-  def get_numero(self):
-    return self.numero_jogador
-  
-  def get_pos(self):
-    return self.pos_jogador
-
 class Defensor(Jogador):
   def __init__(self, nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
     super().__init__(nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao)
@@ -31,18 +19,6 @@ class Defensor(Jogador):
     overall = ((self.defesa_peso + self.fisico_peso + self.passe + self.drible + self.velocidade)/10)
 
     self.overall = Decimal(overall).quantize(0, ROUND_HALF_UP)
-  
-  def get_overall(self):
-    return self.overall
-  
-  def get_nome(self):
-    return self.nome_jogador
-    
-  def get_numero(self):
-    return self.numero_jogador
-  
-  def get_pos(self):
-    return self.pos_jogador
 
 class MeioCampista(Jogador):
   def __init__(self, nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
@@ -55,17 +31,6 @@ class MeioCampista(Jogador):
 
     self.overall = Decimal(overall).quantize(0, ROUND_HALF_UP)
   
-  def get_overall(self):
-    return self.overall
-  
-  def get_nome(self):
-    return self.nome_jogador
-    
-  def get_numero(self):
-    return self.numero_jogador
-  
-  def get_pos(self):
-    return self.pos_jogador
   
 class Atacante(Jogador):
   def __init__(self, nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao):
@@ -79,17 +44,7 @@ class Atacante(Jogador):
 
     self.overall = Decimal(overall).quantize(0, ROUND_HALF_UP)
 
-  def get_overall(self):
-    return self.overall
-  
-  def get_nome(self):
-    return self.nome_jogador
-    
-  def get_numero(self):
-    return self.numero_jogador
-  
-  def get_pos(self):
-    return self.pos_jogador
+
   
 
 
