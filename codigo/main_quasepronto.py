@@ -5,7 +5,7 @@ from timeIFSC import timeIFSC
 from random import randint
 from presets import goleiros_preset, defensores_preset, meio_campistas_preset, atacantes_preset
 
-times_cadastrados = 2
+
 lista_times = [timeAlcateia, timeIFSC]
 lista_times[0].lista_jogadores[2].set_is_capitao()
 lista_times[1].lista_jogadores[6].set_is_capitao()
@@ -217,8 +217,10 @@ while True:
                     a = Atacante(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
                     atacantes.append(a)
                     jogadores.append(a)
-        
-        times_cadastrados += 1
+        for jogad in jogadores:
+            print(f"{jogadores.index(jogad)+1} - {jogad.get_nome()}")
+        cap_escolha = int(input("Escolha qual jogador será o capitão da equipe: "))
+        jogadores[cap_escolha-1].set_is_capitao()
         t = Time(nome_time, jogadores, goleiros, defensores, meio_campistas, atacantes)
         lista_times.append(t)                 
         
@@ -485,8 +487,12 @@ while True:
         time_consultaGeral = int(input("Digite qual dos times você deseja consultar: "))     
         
         print(f"Nome do time: {lista_times[time_consultaGeral-1].get_nome_time}")
+
         for timeCon in lista_times[time_consultaGeral-1].lista_jogadores:
-            print(f"{timeCon.get_pos()}: {timeCon.get_numero()} - {timeCon.get_nome()} - OVR: {timeCon.get_overall()}")
+            if (timeCon.get_is_capitao() == True):
+                print(f"{timeCon.get_pos()}: {timeCon.get_numero()} - {timeCon.get_nome()} (c) - OVR: {timeCon.get_overall()}")
+            else:
+                print(f"{timeCon.get_pos()}: {timeCon.get_numero()} - {timeCon.get_nome()} - OVR: {timeCon.get_overall()}")
 
     if op == 6:
         print("Bem vindo à simulação.")
