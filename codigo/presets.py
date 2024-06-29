@@ -1,7 +1,3 @@
-from subclasses import Goleiro, Defensor, MeioCampista, Atacante
-
-# j1 = Defensor(nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao)
-
 gol1 = [1, 0, 0, 0, 0, 0, 0]
 gol2 = [2, 0, 0, 0, 0, 0, 0]
 gol3 = [3, 0, 0, 0, 0, 0, 0]
