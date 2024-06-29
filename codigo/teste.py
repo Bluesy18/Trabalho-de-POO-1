@@ -1,8 +1,8 @@
 from classes import Jogo
-from time1 import time1
-from time2 import time2
+from timeAlcateia import timeAlcateia
+from timeIFSC import timeIFSC
 
-jogo = Jogo(time1, time2)
+jogo = Jogo(timeAlcateia, timeIFSC)
 jogo.simulacao()
 jogo.perdedor()
 jogo.zebra()

@@ -1,7 +1,7 @@
 from classes import Time, Jogador, Jogo
 from subclasses import Goleiro, Defensor, MeioCampista, Atacante
 from time1 import time1
-from time2 import time2
+from codigo.timeIFSC import time2
 from random import randint
 
 

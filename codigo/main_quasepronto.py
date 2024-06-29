@@ -1,17 +1,12 @@
 from classes import Time, Jogador, Jogo
 from subclasses import Goleiro, Defensor, MeioCampista, Atacante
-from time1 import time1
-from time2 import time2
+from timeAlcateia import timeAlcateia
+from timeIFSC import timeIFSC
 from random import randint
 from presets import goleiros_preset, defensores_preset, meio_campistas_preset, atacantes_preset
 
-'''jogadores = []
-goleiros = []
-defensores = []
-meio_campistas = []
-atacantes = []'''
 times_cadastrados = 2
-lista_times = [time1, time2]
+lista_times = [timeAlcateia, timeIFSC]
 lista_times[0].lista_jogadores[2].set_is_capitao()
 lista_times[1].lista_jogadores[6].set_is_capitao()
 posicoes = ["goleiro", "lat. esquerdo", "zag. esquerdo", "zag. direito", "lat. direito", "volante", "meio-campo esquerdo", "meio-campo direito", "ponta esquerda", "centro-avante", "ponta direita"]
@@ -27,6 +22,7 @@ while True:
     print('3 - Consultar dados de um jogador')
     print('4 - Excluir/Substituir jogador')
     print('5 - Consultar times')
+    print('6 - Simulação')
     print('0 - Encerrar programa')
     op = int(input('Escolha uma operação: '))
     
@@ -54,7 +50,7 @@ while True:
                 if esc == 1:
                     nome_jogador = input("Nome: ")
                     numero_jogador = input("Número da camisa: ")
-                    habgoleiro = int(input("Habilidade do goleiro (0 a 10 estrelas): "))
+                    habgoleiro = int(input("Habilidade do goleiro (1 a 10 estrelas): "))
                     '''g = Jogador(nome_jogador, numero_jogador, "GOL", habgoleiro, 0, 0, 0, 0, 0, 0)
                     '''
                     g = Goleiro(nome_jogador, numero_jogador, posicoesAbv[i], habgoleiro, 0, 0, 0, 0, 0, 0)
@@ -72,7 +68,7 @@ while True:
                 elif esc == 3:
                     nome_jogador = input("Nome: ")
                     numero_jogador = input("Número da camisa: ")
-                    overall = int(input("Selecione a Overall desejada para o Jogador (0 a 10 estrelas): "))
+                    overall = int(input("Selecione a Overall desejada para o Jogador (1 a 10 estrelas): "))
                     habgoleiro = goleiros_preset[overall-1][0]
                     g = Goleiro(nome_jogador, numero_jogador, posicoesAbv[i], habgoleiro, 0, 0, 0, 0, 0, 0)
                     goleiros.append(g)
@@ -87,12 +83,12 @@ while True:
                 if esc == 1:
                     nome_jogador = input("Nome: ")
                     numero_jogador = input("Número da camisa: ")
-                    defesa = int(input("Habilidade em defesa (0 a 10 estrelas): "))
-                    fisico = int(input("Habilidade física (0 a 10 estrelas): "))
-                    passe = int(input("Habilidade em passe (0 a 10 estrelas): "))
-                    drible = int(input("Habilidade em drible (0 a 10 estrelas): "))
-                    velocidade = int(input("Habilidade em velocidade (0 a 10 estrelas): "))
-                    finalização = int(input("Habilidade em finalização (0 a 10 estrelas): "))
+                    defesa = int(input("Habilidade em defesa (1 a 10 estrelas): "))
+                    fisico = int(input("Habilidade física (1 a 10 estrelas): "))
+                    passe = int(input("Habilidade em passe (1 a 10 estrelas): "))
+                    drible = int(input("Habilidade em drible (1 a 10 estrelas): "))
+                    velocidade = int(input("Habilidade em velocidade (1 a 10 estrelas): "))
+                    finalização = int(input("Habilidade em finalização (1 a 10 estrelas): "))
                     '''d = Jogador(nome_jogador, numero_jogador, "DEF", 1, defesa, fisico, 0, 0, 0, 0)
                     '''
                     d = Defensor(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
@@ -115,7 +111,7 @@ while True:
                 elif esc == 3:
                     nome_jogador = input("Nome: ")
                     numero_jogador = input("Número da camisa: ")
-                    overall = int(input("Selecione a Overall desejada para o Jogador (0 a 10 estrelas): "))
+                    overall = int(input("Selecione a Overall desejada para o Jogador (1 a 10 estrelas): "))
                     defesa = defensores_preset[overall-1][1]
                     fisico = defensores_preset[overall-1][2]
                     passe = defensores_preset[overall-1][3]
@@ -135,12 +131,12 @@ while True:
                 if esc == 1:
                     nome_jogador = input("Nome: ")
                     numero_jogador = input("Número da camisa: ")
-                    defesa = int(input("Habilidade em defesa (0 a 10 estrelas): "))
-                    fisico = int(input("Habilidade física (0 a 10 estrelas): "))
-                    passe = int(input("Habilidade em passe (0 a 10 estrelas): "))
-                    drible = int(input("Habilidade em drible (0 a 10 estrelas): "))
-                    velocidade = int(input("Habilidade em velocidade (0 a 10 estrelas): "))
-                    finalização = int(input("Habilidade em finalização (0 a 10 estrelas): "))
+                    defesa = int(input("Habilidade em defesa (1 a 10 estrelas): "))
+                    fisico = int(input("Habilidade física (1 a 10 estrelas): "))
+                    passe = int(input("Habilidade em passe (1 a 10 estrelas): "))
+                    drible = int(input("Habilidade em drible (1 a 10 estrelas): "))
+                    velocidade = int(input("Habilidade em velocidade (1 a 10 estrelas): "))
+                    finalização = int(input("Habilidade em finalização (1 a 10 estrelas): "))
                     '''d = Jogador(nome_jogador, numero_jogador, "DEF", 1, defesa, fisico, 0, 0, 0, 0)
                     '''
                     m = MeioCampista(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
@@ -163,7 +159,7 @@ while True:
                 if esc == 3:
                     nome_jogador = input("Nome: ")
                     numero_jogador = input("Número da camisa: ")
-                    overall = int(input("Selecione a Overall desejada para o Jogador (0 a 10 estrelas): "))
+                    overall = int(input("Selecione a Overall desejada para o Jogador (1 a 10 estrelas): "))
                     defesa = meio_campistas_preset[overall-1][1]
                     fisico = meio_campistas_preset[overall-1][2]
                     passe = meio_campistas_preset[overall-1][3]
@@ -183,12 +179,12 @@ while True:
                 if esc == 1:
                     nome_jogador = input("Nome: ")
                     numero_jogador = input("Número da camisa: ")
-                    defesa = int(input("Habilidade em defesa (0 a 10 estrelas): "))
-                    fisico = int(input("Habilidade física (0 a 10 estrelas): "))
-                    passe = int(input("Habilidade em passe (0 a 10 estrelas): "))
-                    drible = int(input("Habilidade em drible (0 a 10 estrelas): "))
-                    velocidade = int(input("Habilidade em velocidade (0 a 10 estrelas): "))
-                    finalização = int(input("Habilidade em finalização (0 a 10 estrelas): "))
+                    defesa = int(input("Habilidade em defesa (1 a 10 estrelas): "))
+                    fisico = int(input("Habilidade física (1 a 10 estrelas): "))
+                    passe = int(input("Habilidade em passe (1 a 10 estrelas): "))
+                    drible = int(input("Habilidade em drible (1 a 10 estrelas): "))
+                    velocidade = int(input("Habilidade em velocidade (1 a 10 estrelas): "))
+                    finalização = int(input("Habilidade em finalização (1 a 10 estrelas): "))
                     '''d = Jogador(nome_jogador, numero_jogador, "DEF", 1, defesa, fisico, 0, 0, 0, 0)
                     '''
                     a = Atacante(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
@@ -211,7 +207,7 @@ while True:
                 if esc == 3:
                     nome_jogador = input("Nome: ")
                     numero_jogador = input("Número da camisa: ")
-                    overall = int(input("Selecione a Overall desejada para o Jogador (0 a 10 estrelas): "))
+                    overall = int(input("Selecione a Overall desejada para o Jogador (1 a 10 estrelas): "))
                     defesa = atacantes_preset[overall-1][1]
                     fisico = atacantes_preset[overall-1][2]
                     passe = atacantes_preset[overall-1][3]
@@ -224,9 +220,7 @@ while True:
         
         times_cadastrados += 1
         t = Time(nome_time, jogadores, goleiros, defensores, meio_campistas, atacantes)
-        lista_times.append(t)
-        for l in lista_times:
-            print(l.get_nome_time())                  
+        lista_times.append(t)                 
         
     if op == 2:
         print("Bem vindo ao menu de alteração de camisa:")
@@ -262,16 +256,16 @@ while True:
             for jog in lista_times[time_consulta-1].lista_jogadores :
                 if name == jog.get_nome():
                     print("Dados do jogador:")
-                    if (jog.get_is_capitao == True):
+                    if (jog.get_is_capitao() == True):
                         print("> CAPITÃO <")
                     print('Nome:', jog.get_nome())
                     print('Número da camisa:', jog.get_numero())
                     print('Posição:', jog.get_pos())
                     print('Overall(média de habilidade):', jog.get_overall())
                     print("Partidas jogadas:", jog.get_partidas_jogadas())
-                    print("Partidas vencidas:", jog.get_partidas_jogadas())
-                    print("Gols marcados:", jog.get_partidas_jogadas())
-                    print("Assistências feitas:", jog.get_partidas_jogadas())
+                    print("Partidas vencidas:", jog.get_partidas_vencidas())
+                    print("Gols marcados:", jog.get_gols_marcados())
+                    print("Assistências feitas:", jog.get_assistencias_feitas())
                     flag = True
             if flag == False:
                 print("Não existe um jogador cadastrado com esse nome!")
@@ -286,16 +280,16 @@ while True:
             for jog in lista_times[time_consulta-1].lista_jogadores:
                 if nume == jog.get_numero():
                     print("Dados do jogador:")
-                    if (jog.get_is_capitao == True):
+                    if (jog.get_is_capitao() == True):
                         print("> CAPITÃO <")
                     print('Nome:', jog.get_nome())
                     print('Número da camisa:', jog.get_numero())
                     print('Posição:', jog.get_pos())
                     print('Overall(média de habilidade):', jog.get_overall())
                     print("Partidas jogadas:", jog.get_partidas_jogadas())
-                    print("Partidas vencidas:", jog.get_partidas_jogadas())
-                    print("Gols marcados:", jog.get_partidas_jogadas())
-                    print("Assistências feitas:", jog.get_partidas_jogadas())
+                    print("Partidas vencidas:", jog.get_partidas_vencidas())
+                    print("Gols marcados:", jog.get_gols_marcados())
+                    print("Assistências feitas:", jog.get_assistencias_feitas())
                     flag = True
             if flag == False:
                 print("Não existe um jogador cadastrado com esse número de camisa!")
@@ -485,7 +479,7 @@ while True:
             print("Não existe um jogador cadastrado com esse nome!")
     
     if op == 5:
-        print("Bem vindo à consulta de times, temos a disposição dois times diferentes: ")
+        print("Bem vindo à consulta de times.")
         for _ in lista_times:
             print(f"{lista_times.index(_)+1} - {_.get_nome_time()}")
         time_consultaGeral = int(input("Digite qual dos times você deseja consultar: "))     
@@ -493,4 +487,31 @@ while True:
         print(f"Nome do time: {lista_times[time_consultaGeral-1].get_nome_time}")
         for timeCon in lista_times[time_consultaGeral-1].lista_jogadores:
             print(f"{timeCon.get_pos()}: {timeCon.get_numero()} - {timeCon.get_nome()} - OVR: {timeCon.get_overall()}")
+
+    if op == 6:
+        print("Bem vindo à simulação.")
+        lista_simu = lista_times[:]
+        for _ in lista_simu:
+            print(f"{lista_simu.index(_)+1} - {_.get_nome_time()}")
+        time_simu = int(input("Digite qual dos times você deseja inserir na simulação: "))
+        time1 = lista_simu[time_simu-1]
+        lista_simu.remove(time1)
+        for _ in lista_simu:
+            print(f"{lista_simu.index(_)+1} - {_.get_nome_time()}")
+        time_simu = int(input("Digite qual dos times restantes você deseja inserir na simulação: "))
+        time2 = lista_simu[time_simu-1]
+
+        jogo = Jogo(time1, time2)
+        jogo.simulacao()
+        jogo.perdedor()
+        jogo.zebra()
+        jogo.simulacao()
+        jogo.resultado()
+        jogo.ganhador()
+
+    if op == 0:
+        break
+
+
+
 

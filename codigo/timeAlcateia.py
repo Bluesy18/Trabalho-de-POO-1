@@ -23,4 +23,4 @@ defensores = [j2, j3, j4, j5]
 meio_campistas = [j6, j7, j8]
 atacantes = [j9, j10, j11]
 
-time1 = Time("Alcateia", jogadores, goleiros, defensores, meio_campistas, atacantes)
+timeAlcateia = Time("Alcateia", jogadores, goleiros, defensores, meio_campistas, atacantes)

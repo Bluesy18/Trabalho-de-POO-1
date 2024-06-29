@@ -89,9 +89,29 @@ class Time:
     
     def get_perdedor(self):
         return self.perdedor
-    
+
     def set_perdedor(self):
         self.perdedor = True
+
+    def set_perdedor_false(self):
+        self.perdedor = False
+
+    def set_indice_ofensivo_original(self):
+        meias = 0
+        for meia in self.lista_meio_campistas:
+            meias += meia.get_overall()
+
+        meias = meias/len(self.lista_meio_campistas)
+
+        indice_ofensivo = 0
+
+        for ata in self.lista_atacantes:
+            indice_ofensivo += ata.get_overall()
+        
+        indice_ofensivo = (indice_ofensivo/len(self.lista_atacantes))*2
+        indice_ofensivo = (indice_ofensivo+meias)/3
+
+        self.indidice_ofensivo = Decimal(indice_ofensivo).quantize(0, ROUND_HALF_UP)
 
     def set_indice_ofensivo(self, aleatorio):
         io = float(self.indidice_ofensivo)*aleatorio
@@ -159,13 +179,13 @@ class Jogo:
     def __init__(self, time1, time2):
         self.time1 = time1
         self.time2 = time2
-    
-    def simulacao(self):
         for player1 in self.time1.lista_jogadores:
             player1.partidas_jogadas += 1
 
         for player2 in self.time2.lista_jogadores:
             player2.partidas_jogadas += 1
+    
+    def simulacao(self):
 
         gols1 = (self.time1.get_indice_ofensivo()-self.time2.get_indice_defensivo())
 
@@ -181,13 +201,13 @@ class Jogo:
         self.gols2 = gols2
 
 
-        print(f"Indice ofensivo time 1 {self.time1.get_indice_ofensivo()}")
-        print(f"Indice defensivo time 1 {self.time1.get_indice_defensivo()}")
-        print(f"Indice ofensivo time 2 {self.time2.get_indice_ofensivo()}")
-        print(f"Indice defensivo time 2 {self.time2.get_indice_defensivo()}")
+        # print(f"Indice ofensivo time 1 {self.time1.get_indice_ofensivo()}")
+        # print(f"Indice defensivo time 1 {self.time1.get_indice_defensivo()}")
+        # print(f"Indice ofensivo time 2 {self.time2.get_indice_ofensivo()}")
+        # print(f"Indice defensivo time 2 {self.time2.get_indice_defensivo()}")
 
     def resultado(self):
-        print(f"Resultado do jogo:\n{self.time1.get_nome_time()}  {self.gols1} X {self.gols2}  {self.time2.get_nome_time()}")
+        print(f"\nResultado do jogo:\n{self.time1.get_nome_time()}  {self.gols1} X {self.gols2}  {self.time2.get_nome_time()}\n")
 
         self.gols1 = int(self.gols1)
         self.gols2 = int(self.gols2)
@@ -207,13 +227,16 @@ class Jogo:
                 assi1.assistencias_feitas += 1
                 assistentes1.append(assi1.get_nome())
 
-            for f1 in range(self.gols1):
-                if (assistentes1[f1] == artilheiros1[f1]):
-                    assis1[f1].assistencias_feitas -= 1
-                    assistentes1.pop(f1)
+            for f1 in assistentes1:
+                if (assistentes1[assistentes1.index(f1)] == artilheiros1[assistentes1.index(f1)]):
+                    assis1[assistentes1.index(f1)].assistencias_feitas -= 1
+                    assistentes1.pop(assistentes1.index(f1))
 
-            print(f"Os gols do time {self.time1.get_nome_time()} foram de {artilheiros1}")
-            print(f"As assistências do time {self.time1.get_nome_time()} foram de {assistentes1}")
+            artilheiros1p = ", ".join(map(str, artilheiros1))
+            assistentes1p = ", ".join(map(str, assistentes1))
+
+            print(f"O(s) gol(s) do time {self.time1.get_nome_time()} foi(foram) de {artilheiros1p}")
+            print(f"A(s) assistência(s) do time {self.time1.get_nome_time()} foi(foram) de {assistentes1p}\n")
 
         if (self.gols2 > 0):
             artilheiros2 = []
@@ -230,13 +253,15 @@ class Jogo:
                 assi2.assistencias_feitas += 1
                 assistentes2.append(assi2.get_nome())
 
-            for f2 in range(self.gols2):
-                if (assistentes2[f2] == artilheiros2[f2]):
-                    assis2[f2].assistencias_feitas -= 1
-                    assistentes2.pop(f2)
+            for f2 in assistentes2:
+                if (assistentes2[assistentes2.index(f1)] == artilheiros2[assistentes2.index(f1)]):
+                    assis2[assistentes2.index(f1)].assistencias_feitas -= 1
+                    assistentes2.pop(assistentes2.index(f1))
 
-            print(f"Os gols do time {self.time2.get_nome_time()} foram de {artilheiros2}")
-            print(f"As assistências do time {self.time2.get_nome_time()} foram de {assistentes2}")
+            artilheiros2p = ", ".join(map(str, artilheiros2))
+            assistentes2p = ", ".join(map(str, assistentes2))
+            print(f"O(s) gol(s) do time {self.time2.get_nome_time()} foi(foram) de {artilheiros2p}")
+            print(f"A(s) assistência(s) do time {self.time2.get_nome_time()} foi(foram) de {assistentes2p}\n")
 
     def perdedor(self):
         if(self.gols1 > self.gols2):
@@ -264,5 +289,8 @@ class Jogo:
         elif(self.gols1 < self.gols2):
             for player2 in self.time2.lista_jogadores:
                 player2.partidas_vencidas += 1
-        self.time1.set_perdedor()
-        self.time1.set_perdedor()
+        self.time1.set_perdedor_false()
+        self.time2.set_perdedor_false()
+        self.time1.set_indice_ofensivo_original()
+        self.time2.set_indice_ofensivo_original()
+        

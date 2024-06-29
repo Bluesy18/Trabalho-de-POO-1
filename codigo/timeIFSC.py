@@ -23,4 +23,4 @@ defensores = [j2, j3, j4, j5]
 meio_campistas = [j6, j7, j8]
 atacantes = [j9, j10, j11]
 
-time2 = Time("IFSC-SJ", jogadores, goleiros, defensores, meio_campistas, atacantes)
+timeIFSC = Time("IFSC-SJ", jogadores, goleiros, defensores, meio_campistas, atacantes)
