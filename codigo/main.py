@@ -15,7 +15,7 @@ def verifica_esc2(esc):
         esc = int(input("Opção inválida! Digite novamente: "))
     return esc
 
-def verifica_nome(nome_jogador, jogadores):
+def verifica_nome(nome_jogador):
     while any(jogador.nome_jogador == nome_jogador for jogador in jogadores):
         nome_jogador = input("Já existe um jogador cadastrado com esse nome! Por favor digte outro nome: ")
     return nome_jogador
@@ -35,14 +35,31 @@ def verifica_cap(cap):
         cap = int(input("Opção inválida! Digite novamente: "))
     return cap
 
+def verifica_troca(nome,time_sub):
+    while True:
+        for jog in lista_times[time_sub-1].lista_jogadores:
+            if nome == jog.get_nome():
+                nome = input("Nome já existe no time. Digite novamente: ")
+                break
+        else: 
+            return nome
 
-            
+def verifica_troca_num(num,time_sub):
+    while True:
+        for jog in lista_times[time_sub-1].lista_jogadores:
+            if num == jog.get_numero():
+                num = input("Número da camisa já existe no time. Digite novamente: ")
+                break
+        else: 
+            return num
+  
 
 lista_times = [timeAlcateia, timeIFSC]
 lista_times[0].lista_jogadores[2].set_is_capitao()
 lista_times[1].lista_jogadores[6].set_is_capitao()
 posicoes = ["goleiro", "lat. esquerdo", "zag. esquerdo", "zag. direito", "lat. direito", "volante", "meio-campo esquerdo", "meio-campo direito", "ponta esquerda", "centro-avante", "ponta direita"]
 posicoesAbv = ["GOL", "LE", "ZAGE", "ZAGD", "LD", "VOL", "MCE", "MCD", "PE", "ATA", "PD"]
+
 
 flag = False
 
@@ -64,7 +81,8 @@ while True:
         defensores = []
         meio_campistas = []
         atacantes = []
-
+        #jogadores.extend(timeAlcateia.lista_jogadores)
+        
         print("\nBem vindo ao cadastro de jogadores, aqui você cadastrará cada jogador de um time de 11 jogadores:")
         
         nome_time = input("Primeiramente, digite o nome do time: ")
@@ -92,7 +110,7 @@ while True:
                 
                 elif esc == 2:
                     nome_jogador = input("Nome: ")
-                    nome_jogador = verifica_nome(nome_jogador,jogadores)
+                    nome_jogador = verifica_nome(nome_jogador)
                     numero_jogador = input("Número da camisa: ")
                     numero_jogador = verifica_numero(numero_jogador,jogadores)
                     habgoleiro = randint(0, 10)
@@ -309,7 +327,7 @@ while True:
         for num in lista_times[time_camisa-1].lista_jogadores :        
             if name == num.get_nome():
                 num_novo = input("\nDigite o novo número desejado para esse jogador: ")
-                num_novo = verifica_troca(num_novo,lista_jogadores)
+                num_novo = verifica_troca_num(num_novo,time_camisa)
                 num.set_num(num_novo)
                 print(f"Agora, {num.get_nome()} tem o número {num_novo} em sua camisa")
                 flag=True
@@ -404,7 +422,9 @@ while True:
                 if (j.get_pos() == "GOL"):
                     if esc == 1:
                         nome_jogador = input("Nome: ")
+                        nome_jogador = verifica_troca(nome_jogador,time_sub)
                         numero_jogador = input("Número da camisa: ")
+                        numero_jogador = verifica_troca_num(numero_jogador,time_sub)
                         habgoleiro = int(input("Habilidade do goleiro (0 a 10 estrelas): "))                   
                         habgoleiro = verifica_ovr(habgoleiro)
                         g = Goleiro(nome_jogador, numero_jogador, posicoesAbv[i], habgoleiro, 0, 0, 0, 0, 0, 0)
@@ -413,7 +433,9 @@ while True:
                 
                     elif esc == 2:
                         nome_jogador = input("Nome: ")
+                        nome_jogador = verifica_troca(nome_jogador,time_sub)
                         numero_jogador = input("Número da camisa: ")
+                        numero_jogador = verifica_troca_num(numero_jogador,time_sub)
                         habgoleiro = randint(0, 10)
                         g = Goleiro(nome_jogador, numero_jogador, posicoesAbv[i], habgoleiro, 0, 0, 0, 0, 0, 0)
                         lista_times[time_sub-1].lista_goleiros.insert(index_passado, g)
@@ -421,7 +443,9 @@ while True:
                         
                     elif esc == 3:
                         nome_jogador = input("Nome: ")
+                        nome_jogador = verifica_troca(nome_jogador,time_sub)
                         numero_jogador = input("Número da camisa: ")
+                        numero_jogador = verifica_troca_num(numero_jogador,time_sub)
                         overall = int(input("Selecione a Overall desejada para o Jogador (0 a 10 estrelas): "))
                         habgoleiro = goleiros_preset[overall-1][0]
                         g = Goleiro(nome_jogador, numero_jogador, posicoesAbv[i], habgoleiro, 0, 0, 0, 0, 0, 0)
@@ -431,7 +455,9 @@ while True:
                 elif ((j.get_pos() == "LE") or (j.get_pos() == "ZAGE") or (j.get_pos() == "ZAGD") or (j.get_pos() == "LD")):               
                     if esc == 1:
                         nome_jogador = input("Nome: ")
+                        nome_jogador = verifica_troca(nome_jogador,time_sub)
                         numero_jogador = input("Número da camisa: ")
+                        numero_jogador = verifica_troca_num(numero_jogador,time_sub)
                         defesa = int(input("Habilidade em defesa (0 a 10 estrelas): "))
                         fisico = int(input("Habilidade física (0 a 10 estrelas): "))
                         passe = int(input("Habilidade em passe (0 a 10 estrelas): "))
@@ -445,7 +471,9 @@ while True:
                 
                     elif esc == 2:
                         nome_jogador = input("Nome: ")
+                        nome_jogador = verifica_troca(nome_jogador,time_sub)
                         numero_jogador = input("Número da camisa: ")
+                        numero_jogador = verifica_troca_num(numero_jogador,time_sub)
                         defesa = randint(0, 10)
                         fisico = randint(0, 10)
                         passe = randint(0, 10)
@@ -458,7 +486,9 @@ while True:
                         
                     elif esc == 3:
                         nome_jogador = input("Nome: ")
+                        nome_jogador = verifica_troca(nome_jogador,time_sub)
                         numero_jogador = input("Número da camisa: ")
+                        numero_jogador = verifica_troca_num(numero_jogador,time_sub)
                         overall = int(input("Selecione a Overall desejada para o Jogador (0 a 10 estrelas): "))
                         defesa = defensores_preset[overall-1][1]
                         fisico = defensores_preset[overall-1][2]
@@ -473,7 +503,9 @@ while True:
                 elif ((j.get_pos() == "VOL") or (j.get_pos() == "MCE") or (j.get_pos() == "MCD")):                   
                     if esc == 1:
                         nome_jogador = input("Nome: ")
+                        nome_jogador = verifica_troca(nome_jogador,time_sub)
                         numero_jogador = input("Número da camisa: ")
+                        numero_jogador = verifica_troca_num(numero_jogador,time_sub)
                         defesa = int(input("Habilidade em defesa (0 a 10 estrelas): "))
                         fisico = int(input("Habilidade física (0 a 10 estrelas): "))
                         passe = int(input("Habilidade em passe (0 a 10 estrelas): "))
@@ -487,7 +519,9 @@ while True:
                 
                     elif esc == 2:
                         nome_jogador = input("Nome: ")
+                        nome_jogador = verifica_troca(nome_jogador)
                         numero_jogador = input("Número da camisa: ")
+                        numero_jogador = verifica_troca_num(numero_jogador,time_sub)
                         defesa = randint(0, 10)
                         fisico = randint(0, 10)
                         passe = randint(0, 10)
@@ -500,7 +534,9 @@ while True:
                         
                     elif esc == 3:
                         nome_jogador = input("Nome: ")
+                        nome_jogador = verifica_troca(nome_jogador)
                         numero_jogador = input("Número da camisa: ")
+                        numero_jogador = verifica_troca_num(numero_jogador,time_sub)
                         overall = int(input("Selecione a Overall desejada para o Jogador (0 a 10 estrelas): "))
                         defesa = meio_campistas_preset[overall-1][1]
                         fisico = meio_campistas_preset[overall-1][2]
@@ -515,7 +551,9 @@ while True:
                 elif ((j.get_pos() == "PE") or (j.get_pos() == "ATA") or (j.get_pos() == "PD")): 
                     if esc == 1:
                         nome_jogador = input("Nome: ")
+                        nome_jogador = verifica_troca(nome_jogador)
                         numero_jogador = input("Número da camisa: ")
+                        numero_jogador = verifica_troca_num(numero_jogador,time_sub)
                         defesa = int(input("Habilidade em defesa (0 a 10 estrelas): "))
                         fisico = int(input("Habilidade física (0 a 10 estrelas): "))
                         passe = int(input("Habilidade em passe (0 a 10 estrelas): "))
@@ -529,7 +567,9 @@ while True:
                 
                     elif esc == 2:
                         nome_jogador = input("Nome: ")
+                        nome_jogador = verifica_troca(nome_jogador)
                         numero_jogador = input("Número da camisa: ")
+                        numero_jogador = verifica_troca_num(numero_jogador,time_sub)
                         defesa = randint(0, 10)
                         fisico = randint(0, 10)
                         passe = randint(0, 10)
@@ -542,7 +582,9 @@ while True:
                         
                     elif esc == 3:
                         nome_jogador = input("Nome: ")
+                        nome_jogador = verifica_troca(nome_jogador)
                         numero_jogador = input("Número da camisa: ")
+                        numero_jogador = verifica_troca_num(numero_jogador,time_sub)
                         overall = int(input("Selecione a Overall desejada para o Jogador (0 a 10 estrelas): "))
                         defesa = atacantes_preset[overall-1][1]
                         fisico = atacantes_preset[overall-1][2]
@@ -597,10 +639,3 @@ while True:
     
     else:
         print("\nOpção inválida!")
-    
-    
-
-
-
-
-
