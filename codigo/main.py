@@ -15,7 +15,7 @@ def verifica_esc2(esc):
         esc = int(input("Opção inválida! Digite novamente: "))
     return esc
 
-def verifica_nome(nome_jogador):
+def verifica_nome(nome_jogador, jogadores):
     while any(jogador.nome_jogador == nome_jogador for jogador in jogadores):
         nome_jogador = input("Já existe um jogador cadastrado com esse nome! Por favor digte outro nome: ")
     return nome_jogador
@@ -425,7 +425,7 @@ while True:
                         nome_jogador = verifica_troca(nome_jogador,time_sub)
                         numero_jogador = input("Número da camisa: ")
                         numero_jogador = verifica_troca_num(numero_jogador,time_sub)
-                        habgoleiro = int(input("Habilidade do goleiro (0 a 10 estrelas): "))                   
+                        habgoleiro = int(input("Habilidade do goleiro (1 a 10 estrelas): "))                   
                         habgoleiro = verifica_ovr(habgoleiro)
                         g = Goleiro(nome_jogador, numero_jogador, posicoesAbv[i], habgoleiro, 0, 0, 0, 0, 0, 0)
                         lista_times[time_sub-1].lista_goleiros.insert(index_passado, g)
@@ -446,7 +446,7 @@ while True:
                         nome_jogador = verifica_troca(nome_jogador,time_sub)
                         numero_jogador = input("Número da camisa: ")
                         numero_jogador = verifica_troca_num(numero_jogador,time_sub)
-                        overall = int(input("Selecione a Overall desejada para o Jogador (0 a 10 estrelas): "))
+                        overall = int(input("Selecione a Overall desejada para o Jogador (1 a 10 estrelas): "))
                         habgoleiro = goleiros_preset[overall-1][0]
                         g = Goleiro(nome_jogador, numero_jogador, posicoesAbv[i], habgoleiro, 0, 0, 0, 0, 0, 0)
                         lista_times[time_sub-1].lista_goleiros.insert(index_passado, g)
@@ -458,12 +458,12 @@ while True:
                         nome_jogador = verifica_troca(nome_jogador,time_sub)
                         numero_jogador = input("Número da camisa: ")
                         numero_jogador = verifica_troca_num(numero_jogador,time_sub)
-                        defesa = int(input("Habilidade em defesa (0 a 10 estrelas): "))
-                        fisico = int(input("Habilidade física (0 a 10 estrelas): "))
-                        passe = int(input("Habilidade em passe (0 a 10 estrelas): "))
-                        drible = int(input("Habilidade em drible (0 a 10 estrelas): "))
-                        velocidade = int(input("Habilidade em velocidade (0 a 10 estrelas): "))
-                        finalização = int(input("Habilidade em finalização (0 a 10 estrelas): "))
+                        defesa = int(input("Habilidade em defesa (1 a 10 estrelas): "))
+                        fisico = int(input("Habilidade física (1 a 10 estrelas): "))
+                        passe = int(input("Habilidade em passe (1 a 10 estrelas): "))
+                        drible = int(input("Habilidade em drible (1 a 10 estrelas): "))
+                        velocidade = int(input("Habilidade em velocidade (1 a 10 estrelas): "))
+                        finalização = int(input("Habilidade em finalização (1 a 10 estrelas): "))
                         
                         d = Defensor(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
                         lista_times[time_sub-1].lista_defensores.insert(index_passado, d)
@@ -489,7 +489,7 @@ while True:
                         nome_jogador = verifica_troca(nome_jogador,time_sub)
                         numero_jogador = input("Número da camisa: ")
                         numero_jogador = verifica_troca_num(numero_jogador,time_sub)
-                        overall = int(input("Selecione a Overall desejada para o Jogador (0 a 10 estrelas): "))
+                        overall = int(input("Selecione a Overall desejada para o Jogador (1 a 10 estrelas): "))
                         defesa = defensores_preset[overall-1][1]
                         fisico = defensores_preset[overall-1][2]
                         passe = defensores_preset[overall-1][3]
@@ -506,12 +506,12 @@ while True:
                         nome_jogador = verifica_troca(nome_jogador,time_sub)
                         numero_jogador = input("Número da camisa: ")
                         numero_jogador = verifica_troca_num(numero_jogador,time_sub)
-                        defesa = int(input("Habilidade em defesa (0 a 10 estrelas): "))
-                        fisico = int(input("Habilidade física (0 a 10 estrelas): "))
-                        passe = int(input("Habilidade em passe (0 a 10 estrelas): "))
-                        drible = int(input("Habilidade em drible (0 a 10 estrelas): "))
-                        velocidade = int(input("Habilidade em velocidade (0 a 10 estrelas): "))
-                        finalização = int(input("Habilidade em finalização (0 a 10 estrelas): "))
+                        defesa = int(input("Habilidade em defesa (1 a 10 estrelas): "))
+                        fisico = int(input("Habilidade física (1 a 10 estrelas): "))
+                        passe = int(input("Habilidade em passe (1 a 10 estrelas): "))
+                        drible = int(input("Habilidade em drible (1 a 10 estrelas): "))
+                        velocidade = int(input("Habilidade em velocidade (1 a 10 estrelas): "))
+                        finalização = int(input("Habilidade em finalização (1 a 10 estrelas): "))
 
                         m = MeioCampista(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
                         lista_times[time_sub-1].lista_meio_campistas.insert(index_passado, m)
@@ -537,7 +537,7 @@ while True:
                         nome_jogador = verifica_troca(nome_jogador)
                         numero_jogador = input("Número da camisa: ")
                         numero_jogador = verifica_troca_num(numero_jogador,time_sub)
-                        overall = int(input("Selecione a Overall desejada para o Jogador (0 a 10 estrelas): "))
+                        overall = int(input("Selecione a Overall desejada para o Jogador (1 a 10 estrelas): "))
                         defesa = meio_campistas_preset[overall-1][1]
                         fisico = meio_campistas_preset[overall-1][2]
                         passe = meio_campistas_preset[overall-1][3]
@@ -554,12 +554,12 @@ while True:
                         nome_jogador = verifica_troca(nome_jogador)
                         numero_jogador = input("Número da camisa: ")
                         numero_jogador = verifica_troca_num(numero_jogador,time_sub)
-                        defesa = int(input("Habilidade em defesa (0 a 10 estrelas): "))
-                        fisico = int(input("Habilidade física (0 a 10 estrelas): "))
-                        passe = int(input("Habilidade em passe (0 a 10 estrelas): "))
-                        drible = int(input("Habilidade em drible (0 a 10 estrelas): "))
-                        velocidade = int(input("Habilidade em velocidade (0 a 10 estrelas): "))
-                        finalização = int(input("Habilidade em finalização (0 a 10 estrelas): "))
+                        defesa = int(input("Habilidade em defesa (1 a 10 estrelas): "))
+                        fisico = int(input("Habilidade física (1 a 10 estrelas): "))
+                        passe = int(input("Habilidade em passe (1 a 10 estrelas): "))
+                        drible = int(input("Habilidade em drible (1 a 10 estrelas): "))
+                        velocidade = int(input("Habilidade em velocidade (1 a 10 estrelas): "))
+                        finalização = int(input("Habilidade em finalização (1 a 10 estrelas): "))
 
                         a = Atacante(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
                         lista_times[time_sub-1].lista_atacantes.insert(index_passado, a)
@@ -585,7 +585,7 @@ while True:
                         nome_jogador = verifica_troca(nome_jogador)
                         numero_jogador = input("Número da camisa: ")
                         numero_jogador = verifica_troca_num(numero_jogador,time_sub)
-                        overall = int(input("Selecione a Overall desejada para o Jogador (0 a 10 estrelas): "))
+                        overall = int(input("Selecione a Overall desejada para o Jogador (1 a 10 estrelas): "))
                         defesa = atacantes_preset[overall-1][1]
                         fisico = atacantes_preset[overall-1][2]
                         passe = atacantes_preset[overall-1][3]

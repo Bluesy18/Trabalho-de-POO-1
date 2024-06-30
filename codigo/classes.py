@@ -200,12 +200,6 @@ class Jogo:
         self.gols1 = gols1
         self.gols2 = gols2
 
-
-        # print(f"Indice ofensivo time 1 {self.time1.get_indice_ofensivo()}")
-        # print(f"Indice defensivo time 1 {self.time1.get_indice_defensivo()}")
-        # print(f"Indice ofensivo time 2 {self.time2.get_indice_ofensivo()}")
-        # print(f"Indice defensivo time 2 {self.time2.get_indice_defensivo()}")
-
     def resultado(self):
         print(f"\nResultado do jogo:\n{self.time1.get_nome_time()}  {self.gols1} X {self.gols2}  {self.time2.get_nome_time()}\n")
 
@@ -236,7 +230,10 @@ class Jogo:
             assistentes1p = ", ".join(map(str, assistentes1))
 
             print(f"O(s) gol(s) do time {self.time1.get_nome_time()} foi(foram) de {artilheiros1p}")
-            print(f"A(s) assistência(s) do time {self.time1.get_nome_time()} foi(foram) de {assistentes1p}\n")
+            if(len(assistentes1) == 0):
+                print()
+            else:
+                print(f"A(s) assistência(s) do time {self.time1.get_nome_time()} foi(foram) de {assistentes1p}\n")
 
         if (self.gols2 > 0):
             artilheiros2 = []
@@ -261,7 +258,10 @@ class Jogo:
             artilheiros2p = ", ".join(map(str, artilheiros2))
             assistentes2p = ", ".join(map(str, assistentes2))
             print(f"O(s) gol(s) do time {self.time2.get_nome_time()} foi(foram) de {artilheiros2p}")
-            print(f"A(s) assistência(s) do time {self.time2.get_nome_time()} foi(foram) de {assistentes2p}\n")
+            if(len(assistentes2) == 0):
+                print()
+            else:
+                print(f"A(s) assistência(s) do time {self.time2.get_nome_time()} foi(foram) de {assistentes2p}\n")
 
     def perdedor(self):
         if(self.gols1 > self.gols2):
