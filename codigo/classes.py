@@ -254,9 +254,9 @@ class Jogo:
                 assistentes2.append(assi2.get_nome())
 
             for f2 in assistentes2:
-                if (assistentes2[assistentes2.index(f1)] == artilheiros2[assistentes2.index(f1)]):
-                    assis2[assistentes2.index(f1)].assistencias_feitas -= 1
-                    assistentes2.pop(assistentes2.index(f1))
+                if (assistentes2[assistentes2.index(f2)] == artilheiros2[assistentes2.index(f2)]):
+                    assis2[assistentes2.index(f2)].assistencias_feitas -= 1
+                    assistentes2.pop(assistentes2.index(f2))
 
             artilheiros2p = ", ".join(map(str, artilheiros2))
             assistentes2p = ", ".join(map(str, assistentes2))
