@@ -293,4 +293,3 @@ class Jogo:
         self.time2.set_perdedor_false()
         self.time1.set_indice_ofensivo_original()
         self.time2.set_indice_ofensivo_original()
-        
