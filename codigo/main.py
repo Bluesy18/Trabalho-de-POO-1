@@ -605,7 +605,7 @@ while True:
             print(f"{lista_times.index(_)+1} - {_.get_nome_time()}")
         time_consultaGeral = int(input("Digite qual dos times você deseja consultar: "))     
         
-        print(f"Nome do time: {lista_times[time_consultaGeral-1].get_nome_time}\n")
+        print(f"Nome do time: {lista_times[time_consultaGeral-1].get_nome_time()}\n")
 
         for timeCon in lista_times[time_consultaGeral-1].lista_jogadores:
             if (timeCon.get_is_capitao() == True):
