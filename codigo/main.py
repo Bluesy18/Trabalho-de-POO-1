@@ -86,8 +86,11 @@ while True:
         print("\nBem vindo ao cadastro de jogadores, aqui você cadastrará cada jogador de um time de 11 jogadores:")
         
         nome_time = input("Primeiramente, digite o nome do time: ")
-        print(f"Certo. Seu time será chamado de {nome_time} e jogará na formação 4-3-3:")
-        
+        #print(f"Certo. Seu time será chamado de {nome_time} e jogará na formação 4-3-3:")
+        #ADICIONAR AQUI A FUNCAO DE ADD TIME DO bd.py
+
+        #EM CADA JOGADOR ADICIONAR ADD JOGADOR
+
         for i in range(11):
             print(f"\nAgora, cadastre o {posicoes[i]}. Para isso você terá algumas opções:")
             
