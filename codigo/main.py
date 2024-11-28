@@ -1,5 +1,9 @@
-from classes import Time, Jogo
-from subclasses import Goleiro, Defensor, MeioCampista, Atacante
+from Time import Time
+from Jogo import Jogo
+from Goleiro import Goleiro
+from Defensor import Defensor
+from MeioCampista import MeioCampista
+from Atacante import Atacante
 from timeAlcateia import timeAlcateia
 from timeIFSC import timeIFSC
 from random import randint
