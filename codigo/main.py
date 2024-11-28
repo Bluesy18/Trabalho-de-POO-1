@@ -4,6 +4,8 @@ from timeAlcateia import timeAlcateia
 from timeIFSC import timeIFSC
 from random import randint
 from presets import goleiros_preset, defensores_preset, meio_campistas_preset, atacantes_preset
+from bd import BD
+
 
 def verifica_esc(esc):
     while ((esc != 1) and (esc != 2) and (esc != 3)):
@@ -53,7 +55,7 @@ def verifica_troca_num(num,time_sub):
         else: 
             return num
   
-
+bd = BD()
 lista_times = [timeAlcateia, timeIFSC]
 lista_times[0].lista_jogadores[2].set_is_capitao()
 lista_times[1].lista_jogadores[6].set_is_capitao()
@@ -88,6 +90,7 @@ while True:
         nome_time = input("Primeiramente, digite o nome do time: ")
         #print(f"Certo. Seu time será chamado de {nome_time} e jogará na formação 4-3-3:")
         #ADICIONAR AQUI A FUNCAO DE ADD TIME DO bd.py
+        id_time = bd.add_time(nome_time)
 
         #EM CADA JOGADOR ADICIONAR ADD JOGADOR
 
@@ -100,6 +103,8 @@ while True:
                 print("3 - Escolher atributos pré-selecionados, com base na Overall desejada ")
                 esc = int(input("Escolha uma opção descrita acima para cadastrar o jogador: "))
                 esc = verifica_esc(esc)
+                
+                
                 if esc == 1:
                     nome_jogador = input("Nome: ")
                     nome_jogador = verifica_nome(nome_jogador,jogadores)
@@ -110,6 +115,7 @@ while True:
                     g = Goleiro(nome_jogador, numero_jogador, posicoesAbv[i], habgoleiro, 0, 0, 0, 0, 0, 0)
                     goleiros.append(g)
                     jogadores.append(g)
+                    bd.add_jogador(nome_jogador, numero_jogador, posicoesAbv[i], habgoleiro, 0, 0, 0, 0, 0, 0, id_time)
                 
                 elif esc == 2:
                     nome_jogador = input("Nome: ")
@@ -120,6 +126,7 @@ while True:
                     g = Goleiro(nome_jogador, numero_jogador, posicoesAbv[i], habgoleiro, 0, 0, 0, 0, 0, 0)
                     goleiros.append(g)
                     jogadores.append(g)
+                    bd.add_jogador(nome_jogador, numero_jogador, posicoesAbv[i], habgoleiro, 0, 0, 0, 0, 0, 0, id_time)
                     
                 elif esc == 3:
                     nome_jogador = input("Nome: ")
@@ -132,6 +139,7 @@ while True:
                     g = Goleiro(nome_jogador, numero_jogador, posicoesAbv[i], habgoleiro, 0, 0, 0, 0, 0, 0)
                     goleiros.append(g)
                     jogadores.append(g)
+                    bd.add_jogador(nome_jogador, numero_jogador, posicoesAbv[i], habgoleiro, 0, 0, 0, 0, 0, 0, id_time)
             
             elif ((i >= 1) and (i <= 4)):
                 print("1 - Selecionar cada atributo manualmente ")
@@ -154,27 +162,24 @@ while True:
                     drible = verifica_ovr(drible)
                     velocidade = int(input("Habilidade em velocidade (1 a 10 estrelas): "))
                     velocidade = verifica_ovr(velocidade)
-                    finalização = int(input("Habilidade em finalização (1 a 10 estrelas): "))
-                    finalização = verifica_ovr(finalização)
-                    d = Defensor(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                    finalizacao = int(input("Habilidade em finalizacao (1 a 10 estrelas): "))
+                    finalizacao = verifica_ovr(finalizacao)
+                    d = Defensor(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                     defensores.append(d)
                     jogadores.append(d)
-                
+                    bd.add_jogador(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao, id_time)
+              
                 elif esc == 2:
                     nome_jogador = input("Nome: ")
                     nome_jogador = verifica_nome(nome_jogador,jogadores)
                     numero_jogador = input("Número da camisa: ")
                     numero_jogador = verifica_numero(numero_jogador,jogadores)
-                    defesa = randint(0, 10)
-                    fisico = randint(0, 10)
-                    passe = randint(0, 10)
-                    drible = randint(0, 10)
-                    velocidade = randint(0, 10)
-                    finalização = randint(0, 10)
-                    d = Defensor(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                    defesa, fisico, passe, drible, velocidade, finalizacao = [randint(0, 10) for _ in range(6)]
+                    d = Defensor(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                     defensores.append(d)
                     jogadores.append(d)
-                    
+                    bd.add_jogador(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao, id_time)
+
                 elif esc == 3:
                     nome_jogador = input("Nome: ")
                     nome_jogador = verifica_nome(nome_jogador,jogadores)
@@ -182,15 +187,11 @@ while True:
                     numero_jogador = verifica_numero(numero_jogador,jogadores)
                     overall = int(input("Selecione a Overall desejada para o Jogador (1 a 10 estrelas): "))
                     overall = verifica_ovr(overall)
-                    defesa = defensores_preset[overall-1][1]
-                    fisico = defensores_preset[overall-1][2]
-                    passe = defensores_preset[overall-1][3]
-                    drible = defensores_preset[overall-1][4]
-                    velocidade = defensores_preset[overall-1][5]
-                    finalização = defensores_preset[overall-1][6]
-                    d = Defensor(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                    defesa, fisico, passe, drible, velocidade, finalizacao = defensores_preset[overall-1][1:7]
+                    d = Defensor(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                     defensores.append(d)
                     jogadores.append(d)
+                    bd.add_jogador(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao, id_time)
                           
             elif ((i >= 5) and (i <= 7)):
                 print("1 - Selecionar cada atributo manualmente ")
@@ -213,27 +214,23 @@ while True:
                     drible = verifica_ovr(drible)
                     velocidade = int(input("Habilidade em velocidade (1 a 10 estrelas): "))
                     velocidade = verifica_ovr(velocidade)
-                    finalização = int(input("Habilidade em finalização (1 a 10 estrelas): "))
-                    finalização = verifica_ovr(finalização)
-
-                    m = MeioCampista(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                    finalizacao = int(input("Habilidade em finalizacao (1 a 10 estrelas): "))
+                    finalizacao = verifica_ovr(finalizacao)
+                    m = MeioCampista(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                     meio_campistas.append(m)
                     jogadores.append(m)
-                
+                    bd.add_jogador(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao, id_time)
+
                 elif esc == 2:
                     nome_jogador = input("Nome: ")
                     nome_jogador = verifica_nome(nome_jogador,jogadores)
                     numero_jogador = input("Número da camisa: ")
                     numero_jogador = verifica_numero(numero_jogador,jogadores)
-                    defesa = randint(0, 10)
-                    fisico = randint(0, 10)
-                    passe = randint(0, 10)
-                    drible = randint(0, 10)
-                    velocidade = randint(0, 10)
-                    finalização = randint(0, 10)
-                    m = MeioCampista(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                    defesa, fisico, passe, drible, velocidade, finalizacao = [randint(0, 10) for _ in range(6)]
+                    m = MeioCampista(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                     meio_campistas.append(m)
                     jogadores.append(m)
+                    bd.add_jogador(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao, id_time)
                     
                 elif esc == 3:
                     nome_jogador = input("Nome: ")
@@ -242,15 +239,11 @@ while True:
                     numero_jogador = verifica_numero(numero_jogador,jogadores)
                     overall = int(input("Selecione a Overall desejada para o Jogador (1 a 10 estrelas): "))
                     overall = verifica_ovr(overall)
-                    defesa = meio_campistas_preset[overall-1][1]
-                    fisico = meio_campistas_preset[overall-1][2]
-                    passe = meio_campistas_preset[overall-1][3]
-                    drible = meio_campistas_preset[overall-1][4]
-                    velocidade = meio_campistas_preset[overall-1][5]
-                    finalização = meio_campistas_preset[overall-1][6]
-                    m = MeioCampista(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                    defesa, fisico, passe, drible, velocidade, finalizacao = meio_campistas_preset[overall-1][1:7]                    
+                    m = MeioCampista(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                     meio_campistas.append(m)
                     jogadores.append(m)
+                    bd.add_jogador(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao, id_time)
                     
             elif ((i >= 8) and (i <= 10)):
                 print("1 - Selecionar cada atributo manualmente ")
@@ -273,26 +266,23 @@ while True:
                     drible = verifica_ovr(drible)
                     velocidade = int(input("Habilidade em velocidade (1 a 10 estrelas): "))
                     velocidade = verifica_ovr(velocidade)
-                    finalização = int(input("Habilidade em finalização (1 a 10 estrelas): "))
-                    finalização = verifica_ovr(finalização)
-                    a = Atacante(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                    finalizacao = int(input("Habilidade em finalizacao (1 a 10 estrelas): "))
+                    finalizacao = verifica_ovr(finalizacao)
+                    a = Atacante(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                     atacantes.append(a)
                     jogadores.append(a)
+                    bd.add_jogador(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao, id_time)
                 
                 elif esc == 2:
                     nome_jogador = input("Nome: ")
                     nome_jogador = verifica_nome(nome_jogador,jogadores)
                     numero_jogador = input("Número da camisa: ")
                     numero_jogador = verifica_numero(numero_jogador,jogadores)
-                    defesa = randint(0, 10)
-                    fisico = randint(0, 10)
-                    passe = randint(0, 10)
-                    drible = randint(0, 10)
-                    velocidade = randint(0, 10)
-                    finalização = randint(0, 10)
-                    a = Atacante(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                    defesa, fisico, passe, drible, velocidade, finalizacao = [randint(0, 10) for _ in range(6)]
+                    a = Atacante(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                     atacantes.append(a)
                     jogadores.append(a)
+                    bd.add_jogador(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao, id_time)
                     
                 elif esc == 3:
                     nome_jogador = input("Nome: ")
@@ -301,15 +291,12 @@ while True:
                     numero_jogador = verifica_numero(numero_jogador,jogadores)
                     overall = int(input("Selecione a Overall desejada para o Jogador (1 a 10 estrelas): "))
                     overall = verifica_ovr(overall)
-                    defesa = atacantes_preset[overall-1][1]
-                    fisico = atacantes_preset[overall-1][2]
-                    passe = atacantes_preset[overall-1][3]
-                    drible = atacantes_preset[overall-1][4]
-                    velocidade = atacantes_preset[overall-1][5]
-                    finalização = atacantes_preset[overall-1][6]
-                    a = Atacante(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                    defesa, fisico, passe, drible, velocidade, finalizacao = atacantes_preset[overall-1][1:7]                    
+                    a = Atacante(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                     atacantes.append(a)
                     jogadores.append(a)
+                    bd.add_jogador(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao, id_time)
+                    
         print("Time criado e jogadores adicionados com sucesso:\n")
         for jogad in jogadores:
             print(f"{jogadores.index(jogad)+1} - {jogad.get_nome()}")
@@ -466,9 +453,9 @@ while True:
                         passe = int(input("Habilidade em passe (1 a 10 estrelas): "))
                         drible = int(input("Habilidade em drible (1 a 10 estrelas): "))
                         velocidade = int(input("Habilidade em velocidade (1 a 10 estrelas): "))
-                        finalização = int(input("Habilidade em finalização (1 a 10 estrelas): "))
+                        finalizacao = int(input("Habilidade em finalizacao (1 a 10 estrelas): "))
                         
-                        d = Defensor(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                        d = Defensor(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                         lista_times[time_sub-1].lista_defensores.insert(index_passado, d)
                         lista_times[time_sub-1].lista_jogadores.insert(i, d)
                 
@@ -482,8 +469,8 @@ while True:
                         passe = randint(0, 10)
                         drible = randint(0, 10)
                         velocidade = randint(0, 10)
-                        finalização = randint(0, 10)
-                        d = Defensor(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                        finalizacao = randint(0, 10)
+                        d = Defensor(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                         lista_times[time_sub-1].lista_defensores.insert(index_passado, d)
                         lista_times[time_sub-1].lista_jogadores.insert(i, d)
                         
@@ -498,8 +485,8 @@ while True:
                         passe = defensores_preset[overall-1][3]
                         drible = defensores_preset[overall-1][4]
                         velocidade = defensores_preset[overall-1][5]
-                        finalização = defensores_preset[overall-1][6]
-                        d = Defensor(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                        finalizacao = defensores_preset[overall-1][6]
+                        d = Defensor(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                         lista_times[time_sub-1].lista_defensores.insert(index_passado, d)
                         lista_times[time_sub-1].lista_jogadores.insert(i, d)
                 
@@ -514,9 +501,9 @@ while True:
                         passe = int(input("Habilidade em passe (1 a 10 estrelas): "))
                         drible = int(input("Habilidade em drible (1 a 10 estrelas): "))
                         velocidade = int(input("Habilidade em velocidade (1 a 10 estrelas): "))
-                        finalização = int(input("Habilidade em finalização (1 a 10 estrelas): "))
+                        finalizacao = int(input("Habilidade em finalizacao (1 a 10 estrelas): "))
 
-                        m = MeioCampista(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                        m = MeioCampista(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                         lista_times[time_sub-1].lista_meio_campistas.insert(index_passado, m)
                         lista_times[time_sub-1].lista_jogadores.insert(i, m)
                 
@@ -530,8 +517,8 @@ while True:
                         passe = randint(0, 10)
                         drible = randint(0, 10)
                         velocidade = randint(0, 10)
-                        finalização = randint(0, 10)
-                        m = MeioCampista(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                        finalizacao = randint(0, 10)
+                        m = MeioCampista(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                         lista_times[time_sub-1].lista_meio_campistas.insert(index_passado, m)
                         lista_times[time_sub-1].lista_jogadores.insert(i, m)
                         
@@ -546,8 +533,8 @@ while True:
                         passe = meio_campistas_preset[overall-1][3]
                         drible = meio_campistas_preset[overall-1][4]
                         velocidade = meio_campistas_preset[overall-1][5]
-                        finalização = meio_campistas_preset[overall-1][6]
-                        m = MeioCampista(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                        finalizacao = meio_campistas_preset[overall-1][6]
+                        m = MeioCampista(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                         lista_times[time_sub-1].lista_meio_campistas.insert(index_passado, m)
                         lista_times[time_sub-1].lista_jogadores.insert(i, m)
                 
@@ -562,9 +549,9 @@ while True:
                         passe = int(input("Habilidade em passe (1 a 10 estrelas): "))
                         drible = int(input("Habilidade em drible (1 a 10 estrelas): "))
                         velocidade = int(input("Habilidade em velocidade (1 a 10 estrelas): "))
-                        finalização = int(input("Habilidade em finalização (1 a 10 estrelas): "))
+                        finalizacao = int(input("Habilidade em finalizacao (1 a 10 estrelas): "))
 
-                        a = Atacante(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                        a = Atacante(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                         lista_times[time_sub-1].lista_atacantes.insert(index_passado, a)
                         lista_times[time_sub-1].lista_jogadores.insert(i, a)
                 
@@ -578,8 +565,8 @@ while True:
                         passe = randint(0, 10)
                         drible = randint(0, 10)
                         velocidade = randint(0, 10)
-                        finalização = randint(0, 10)
-                        a = Atacante(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                        finalizacao = randint(0, 10)
+                        a = Atacante(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                         lista_times[time_sub-1].lista_atacantes.insert(index_passado, a)
                         lista_times[time_sub-1].lista_jogadores.insert(i, a)
                         
@@ -594,8 +581,8 @@ while True:
                         passe = atacantes_preset[overall-1][3]
                         drible = atacantes_preset[overall-1][4]
                         velocidade = atacantes_preset[overall-1][5]
-                        finalização = atacantes_preset[overall-1][6]
-                        a = Atacante(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalização)
+                        finalizacao = atacantes_preset[overall-1][6]
+                        a = Atacante(nome_jogador, numero_jogador, posicoesAbv[i], 1, defesa, fisico, passe, drible, velocidade, finalizacao)
                         lista_times[time_sub-1].lista_atacantes.insert(index_passado, a)
                         lista_times[time_sub-1].lista_jogadores.insert(i, a)
                 flag=True
@@ -604,7 +591,8 @@ while True:
     
     elif op == 5:
         print("\nBem vindo à consulta de times.")
-        for _ in lista_times:
+        bd.listar_times()
+        '''for _ in lista_times:
             print(f"{lista_times.index(_)+1} - {_.get_nome_time()}")
         time_consultaGeral = int(input("Digite qual dos times você deseja consultar: "))     
         
@@ -614,7 +602,7 @@ while True:
             if (timeCon.get_is_capitao() == True):
                 print(f"{timeCon.get_pos()}: {timeCon.get_numero()} - {timeCon.get_nome()} (c) - OVR: {timeCon.get_overall()}")
             else:
-                print(f"{timeCon.get_pos()}: {timeCon.get_numero()} - {timeCon.get_nome()} - OVR: {timeCon.get_overall()}")
+                print(f"{timeCon.get_pos()}: {timeCon.get_numero()} - {timeCon.get_nome()} - OVR: {timeCon.get_overall()}")'''
 
     elif op == 6:
         print("\nBem vindo à simulação.")
