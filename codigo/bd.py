@@ -47,16 +47,6 @@ class BD:
             return None
 
 
-    '''def buscar_id_time(nome):
-        cursor.execute("SELECT id FROM times WHERE nome_time = ?", (nome,))
-        time = cursor.fetchone()
-        if time:
-            return time[0]
-        else:
-            return None'''
-
-
-
     def add_jogador(self,nome_jogador, numero, posicao, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao,id_time):
         self.cursor.execute('''
         INSERT INTO jogadores 
@@ -77,7 +67,22 @@ class BD:
     def listar_times(self):
         self.cursor.execute("SELECT nome_time FROM times")
         times = self.cursor.fetchall()
-        print(*times)
+        times = [time[0] for time in times]
+        print("\n".join(times))
+
+    def consulta_times(self,nome_time):
+        self.cursor.execute('''
+        SELECT nome_jogador, numero, posicao
+        FROM jogadores
+        JOIN times ON jogadores.time_id = times.id
+        WHERE times.nome_time = ?
+        ''', (nome_time,))
+        consulta = self.cursor.fetchall()
+        
+        print(f"Jogadores do {nome_time}: ")
+        for i in consulta:
+            print(f"{i[0]} - Camisa {i[1]} - Posição: {i[2]}")
+        
 
     
 

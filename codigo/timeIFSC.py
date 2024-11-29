@@ -1,6 +1,8 @@
-from classes import Time
-from subclasses import Goleiro, Defensor, MeioCampista, Atacante
-
+from Time import Time
+from Goleiro import Goleiro
+from Defensor import Defensor
+from MeioCampista import MeioCampista
+from Atacante import Atacante
 # j1 = Defensor(nome_jogador, numero_jogador, pos_jogador, habgoleiro, defesa, fisico, passe, drible, velocidade, finalizacao)
 
 j1 = Goleiro("Truppel", "1", "GOL", 10, 0, 0, 0, 0, 0, 0)

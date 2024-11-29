@@ -594,20 +594,11 @@ while True:
             print("Não existe um jogador cadastrado com esse nome!")
     
     elif op == 5:
-        print("\nBem vindo à consulta de times.")
+        print("\nBem vindo à consulta de times. Veja os times existentes para consultar:")
         bd.listar_times()
-        '''for _ in lista_times:
-            print(f"{lista_times.index(_)+1} - {_.get_nome_time()}")
-        time_consultaGeral = int(input("Digite qual dos times você deseja consultar: "))     
+        escolha_time = input("\nDigite o nome do time que deseja consultar: ")
+        bd.consulta_times(escolha_time)
         
-        print(f"Nome do time: {lista_times[time_consultaGeral-1].get_nome_time()}\n")
-
-        for timeCon in lista_times[time_consultaGeral-1].lista_jogadores:
-            if (timeCon.get_is_capitao() == True):
-                print(f"{timeCon.get_pos()}: {timeCon.get_numero()} - {timeCon.get_nome()} (c) - OVR: {timeCon.get_overall()}")
-            else:
-                print(f"{timeCon.get_pos()}: {timeCon.get_numero()} - {timeCon.get_nome()} - OVR: {timeCon.get_overall()}")'''
-
     elif op == 6:
         print("\nBem vindo à simulação.")
         lista_simu = lista_times[:]
